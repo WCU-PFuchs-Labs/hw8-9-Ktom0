@@ -1,18 +1,23 @@
 import java.util.ArrayList;
+import binary.Generation;
+import binary.GPTree;
 
 public class TestGeneration {
 
     public static void main(String[] args) {
 
-        System.out.println("Enter the data file name:");
-        String fileName = TextIO.getlnString();
+        if (args.length < 1) {
+            System.out.println("Usage: java TestGeneration <datafile>");
+            return;
+        }
+
+        String fileName = args[0];
 
         Generation gen = new Generation(500, 6, fileName);
 
         gen.evalAll();
 
         gen.printBestTree();
-
         gen.printBestFitness();
 
         ArrayList<GPTree> top = gen.getTopTen();
