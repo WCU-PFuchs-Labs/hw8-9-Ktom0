@@ -1,14 +1,16 @@
 package binary;
-
 import java.util.Random;
 import tabular.DataSet;
 import tabular.DataRow;
 
-public class GPTree {
-    private final int numIndepVars;
-    private final int maxDepth;
-    private final Random rand;
-    private Node root;
+
+public class GPTree implements Comparable<GPTree>, Cloneable {
+
+    private final int numIndepVars;  
+    private final int maxDepth;   
+    private final Random rand;  
+
+    private Node root;     
 
     private double fitness = Double.POSITIVE_INFINITY;
 
@@ -34,7 +36,6 @@ public class GPTree {
         if (depth <= 1) {
             return makeRandomLeaf();
         }
-      
         Node left  = build(depth - 1);
         Node right = build(depth - 1);
         Binop op   = randomOp();
@@ -48,7 +49,7 @@ public class GPTree {
             return new Node(new Variable(idx));
         } 
         else {
-            int n = rand.nextInt(20) + 1;
+            int n = rand.nextInt(20) + 1; 
             return new Node(new Const(n));
         }
     }
@@ -99,7 +100,7 @@ public class GPTree {
         double sum = 0.0;
 
         for (DataRow row : dataSet) {
-            double[] xVals = row.getX();   
+            double[] xVals = row.getX();  
             double y = row.getY();
             double guess = eval(xVals);
             double diff = guess - y;
@@ -113,34 +114,30 @@ public class GPTree {
         return fitness;
     }
 
-    public int compareFitness(GPTree t) {
-        if (t == null) {
+    public int compareTo(GPTree other) {
+        if (other == null) {
             return 1;
         }
-        return Double.compare(this.fitness, t.fitness);
+        return Double.compare(this.fitness, other.fitness);
     }
 
-    public boolean sameFitness(GPTree other) {
-        if (other == null) return false;
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof GPTree)) return false;
+        GPTree other = (GPTree) o;
         return Double.compare(this.fitness, other.fitness) == 0;
     }
 
-    public GPTree copy() {
+    public Object clone() {
         try {
-            GPTree copy = new GPTree(this.numIndepVars, this.maxDepth, this.rand);
-            copy.fitness = this.fitness;
-
+            GPTree copy = (GPTree) super.clone();
             if (this.root != null) {
-                copy.root = (Node) this.root.clone(); 
-            } 
-            else {
-                copy.root = null;
+                copy.root = (Node) this.root.clone();
             }
-
             return copy;
-        } 
-        catch (Exception e) {
-            throw new RuntimeException("Error copying GPTree", e);
+        }
+        catch (CloneNotSupportedException e) {
+            throw new AssertionError(e);
         }
     }
 
