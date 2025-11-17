@@ -18,8 +18,9 @@ public class Generation {
 
         int numIndepVars = dataSet.getNumIndep();
 
-        NodeFactory factory = new NodeFactory(numIndepVars);
-
+        Binop[] ops = { new Plus(), new Minus(), new Mult(), new Divide() };
+        NodeFactory factory = new NodeFactory(ops, numIndepVars);   
+        
         trees = new GPTree[size];
         for (int i = 0; i < size; i++) {
             trees[i] = new GPTree(factory, maxDepth, rand);
