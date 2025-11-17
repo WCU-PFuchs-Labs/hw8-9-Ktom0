@@ -98,17 +98,19 @@ public class GPTree implements Comparable<GPTree>, Cloneable {
         }
 
         double sum = 0.0;
+        
+        for (DataRow row : dataSet.getRows()) {
+            
+        double[] xVals = row.getIndependentVariables();
+        double y = row.getDependentVariable();
 
-        for (DataRow row : dataSet) {
-            double[] xVals = row.getX();  
-            double y = row.getY();
-            double guess = eval(xVals);
-            double diff = guess - y;
-            sum += diff * diff;
-        }
-
-        this.fitness = sum;
+        double guess = eval(xVals);
+        double diff = guess - y;
+        sum += diff * diff;
     }
+
+    this.fitness = sum;
+}
 
     public double getFitness() {
         return fitness;
