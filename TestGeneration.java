@@ -17,7 +17,7 @@ public class TestGeneration {
 
         ArrayList<GPTree> top = gen.getTopTen();
 
-        System.out.print("Top 10 fitness values: ");
+        System.out.print("Top Ten fitness values: ");
         for (int i = 0; i < top.size(); i++) {
             System.out.printf("%.2f", top.get(i).getFitness());
             if (i < top.size() - 1) {
