@@ -36,7 +36,7 @@ public class Generation {
             int bestIndex = i;
 
             for (int j = i + 1; j < trees.length; j++) {
-                if (trees[j].compareFitness(trees[bestIndex]) < 0) {
+                if (trees[j].compareTo(trees[bestIndex]) < 0) {
                     bestIndex = j;
                 }
             }
@@ -106,9 +106,9 @@ public class Generation {
             GPTree parent1 = trees[p1Index];
             GPTree parent2 = trees[p2Index];
 
-            GPTree child1 = parent1.copy();
-            GPTree child2 = parent2.copy();
-
+            GPTree child1 = (GPTree) parent1.clone();
+            GPTree child2 = (GPTree) parent2.clone();
+            
             newTrees[index] = child1;
             index++;
 
