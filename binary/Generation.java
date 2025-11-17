@@ -16,8 +16,8 @@ public class Generation {
         this.maxDepth = maxDepth;
         rand = new Random();
 
-        int numIndepVars = dataSet.getNumIndep();
-
+        int numIndepVars = dataSet.getNumIndependentVariables();
+        
         Binop[] ops = { new Plus(), new Minus(), new Mult(), new Divide() };
         NodeFactory factory = new NodeFactory(ops, numIndepVars);   
         
