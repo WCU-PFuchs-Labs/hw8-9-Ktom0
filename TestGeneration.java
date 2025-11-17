@@ -6,11 +6,6 @@ public class TestGeneration {
 
     public static void main(String[] args) {
 
-        if (args.length < 1) {
-            System.out.println("Usage: java TestGeneration <datafile>");
-            return;
-        }
-
         String fileName = args[0];
 
         Generation gen = new Generation(500, 6, fileName);
